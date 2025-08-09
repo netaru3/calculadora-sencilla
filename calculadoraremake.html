@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+
+</head>
+<body>
+    <style> body{background: linear-gradient(to bottom, rgb(150, 250, 250), #90b6c2);
+height: 600px;}</style>
+<style> button{background-color: rgb(144, 245, 245);}</style>
+    <h1>calculadora simple</h1>
+<h2 style="display:block; margin:0 auto;border: 2px solid;border-radius: 2px;
+position: relative;text-align: center; width: 170px;" id="pantalla"></h2>
+<br>
+<div style="text-align: center;"> 
+    <button style="display:inline; position: relative;" onclick="mostrar7()">7</button>
+    <button style="display:inline; position: relative;" onclick="mostrar8()">8</button>
+    <button style="display:inline; position: relative;" onclick="mostrar9()">9</button>
+    <button style="display:inline; position: relative;" onclick="dividir()">÷</button>
+     <button style="display: inline;
+     width: 4px;" onclick="borrar()">B</button>
+</div>
+<div style="text-align: center;"> 
+    <button style="display:inline; position: relative;" onclick="mostrar4()">4</button>
+    <button style="display:inline; position: relative;"onclick="mostrar5()">5</button>
+    <button style="display:inline; position: relative;"onclick="mostrar6()">6</button>
+    <button style="display:inline; position: relative;" onclick="multiplicar()">x</button>
+</div>
+<div style="text-align: center;"> 
+    <button style="display:inline; position: relative;"onclick="mostrar1()">1</button>
+    <button style="display:inline; position: relative;"onclick="mostrar2()">2</button>
+    <button style="display:inline; position: relative;"onclick="mostrar3()">3</button>
+    <button style="display:inline; position: relative;" onclick="restar()">-</button>
+</div>
+<div style="text-align: center;"> 
+    <button style="display:inline; position: relative;"onclick="mostrar0()">0</button>
+    <button style="display:inline; position: relative;" onclick="reset()">r</button>
+    <button style="display:inline; position: relative;" onclick="resultado()">=</button>
+    <button style="display:inline; position: relative;" onclick="sumar()">+</button>
+</div>
+    <script src="calculadora.js"></script>
+</body>
+</html>
