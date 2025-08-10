@@ -54,7 +54,7 @@ function sumar(){if(document.getElementById("pantalla").textContent.toString().l
 };
 }
 function resultado(){if(document.getElementById("pantalla").textContent.toString().length<12){
-    return document.getElementById("pantalla").textContent=eval(document.getElementById("pantalla").textContent)
+    return document.getElementById("pantalla").textContent=eval(document.getElementById("pantalla").textContent).toFixed(5)
 };
 }
 
@@ -79,3 +79,4 @@ function borrar(){if(document.getElementById("pantalla").textContent.toString().
 }
 
 function reset(){document.getElementById("pantalla").textContent=""}
+
