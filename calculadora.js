@@ -54,7 +54,7 @@ function sumar(){if(document.getElementById("pantalla").textContent.toString().l
 };
 }
 function resultado(){if(document.getElementById("pantalla").textContent.toString().length<12){
-    return document.getElementById("pantalla").textContent=eval(document.getElementById("pantalla").textContent).toFixed(5)
+    return document.getElementById("pantalla").textContent=eval(document.getElementById("pantalla").textContent).toFixed(2)
 };
 }
 
@@ -73,10 +73,9 @@ function multiplicar(){if(document.getElementById("pantalla").textContent.toStri
 };
 }
 
-function borrar(){if(document.getElementById("pantalla").textContent.toString().length<10){
+function borrar(){if(document.getElementById("pantalla").textContent.toString().length<18){
     return document.getElementById("pantalla").textContent=document.getElementById("pantalla").textContent.slice(0,-1)
 };
 }
 
 function reset(){document.getElementById("pantalla").textContent=""}
-
