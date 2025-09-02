@@ -1,75 +1,561 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora</title>
+    <title>Calculadora Digital Profesional</title>
+      <link rel="icon" href="https://img.freepik.com/vector-gratis/icono-calculadora-matematica_24877-83245.jpg?semt=ais_hybrid&w=740&q=80">
+<link rel="https://img.freepik.com/vector-gratis/icono-calculadora-matematica_24877-83245.jpg?semt=ais_hybrid&w=740&q=80">
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background elements */
+        .bg-decoration {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .bg-decoration:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            animation-delay: 0s;
+        }
+
+        .bg-decoration:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 20%;
+            right: -100px;
+            animation-delay: 2s;
+        }
+
+        .bg-decoration:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+            50% { transform: translateY(-30px) rotate(180deg); opacity: 0.2; }
+        }
+
+        .calculator-container {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border-radius: 30px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+            max-width: 400px;
+            width: 100%;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffffff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .calculator-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+        }
+
+        .display {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        #pantalla {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-align: right;
+            min-height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            background: transparent;
+            border: none;
+            outline: none;
+            width: 100%;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 2;
+            line-height: 1;
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .calc-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .calc-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .calc-btn:hover::before {
+            opacity: 1;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .calc-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .calc-btn.number {
+            background: rgba(108, 99, 255, 0.3);
+            border-color: rgba(108, 99, 255, 0.4);
+        }
+
+        .calc-btn.number:hover {
+            background: rgba(108, 99, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+        }
+
+        .calc-btn.operator {
+            background: rgba(255, 107, 107, 0.3);
+            border-color: rgba(255, 107, 107, 0.4);
+            font-weight: 700;
+        }
+
+        .calc-btn.operator:hover {
+            background: rgba(255, 107, 107, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .calc-btn.equals {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            border-color: rgba(79, 172, 254, 0.6);
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .calc-btn.equals:hover {
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
+        }
+
+        .calc-btn.utility {
+            background: rgba(255, 193, 7, 0.3);
+            border-color: rgba(255, 193, 7, 0.4);
+            font-weight: 700;
+        }
+
+        .calc-btn.utility:hover {
+            background: rgba(255, 193, 7, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.3);
+        }
+
+        .calc-btn.zero {
+            grid-column: span 2;
+        }
+
+        /* Responsive design */
+        @media (max-width: 480px) {
+            .calculator-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .buttons-grid {
+                gap: 0.8rem;
+            }
+            
+            .calc-btn {
+                padding: 1rem;
+                font-size: 1.1rem;
+                min-height: 50px;
+            }
+            
+            #pantalla {
+                font-size: 2rem;
+            }
+        }
+
+        /* Glowing effect for active display */
+        .display.active {
+            box-shadow: 
+                inset 0 4px 15px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(79, 172, 254, 0.3);
+            border-color: rgba(79, 172, 254, 0.4);
+        }
+
+        /* Button press animation */
+        @keyframes buttonPress {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        .calc-btn.pressed {
+            animation: buttonPress 0.15s ease;
+        }
+    </style>
 </head>
 <body>
-    <style> body{background: linear-gradient(to bottom, rgb(150, 250, 250), #90b6c2);
-height: 600px;}</style>
-<style> button{background-color: rgb(144, 245, 245);}</style>
-    <h1>calculadora simple</h1>
-<h2 style="display:block; margin:0 auto;border: 2px solid;border-radius: 2px;
-position: relative;text-align: center; width: 170px;" id="pantalla"></h2>
-<br>
-<div style="text-align: center;"> 
-    <button style="display:inline; position: relative;
-    width: 30px;
-    height: 30px;" onclick="mostrar7()">7</button>
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;" onclick="mostrar8()">8</button>
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;" onclick="mostrar9()">9</button>
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;" onclick="dividir()">÷</button>
-</div>
-<div style="text-align: center;"> 
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;" onclick="mostrar4()">4</button>
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;"onclick="mostrar5()">5</button>
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;"onclick="mostrar6()">6</button>
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;" onclick="multiplicar()">x</button>
-</div>
-<div style="text-align: center;"> 
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;"onclick="mostrar1()">1</button>
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;"onclick="mostrar2()">2</button>
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;"onclick="mostrar3()">3</button>
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;" onclick="restar()">-</button>
-</div>
-<div style="text-align: center;"> 
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;"onclick="mostrar0()">0</button>
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;" onclick="borrar()">r</button>
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;" onclick="resultado()">=</button>
-    <button style="display:inline; position: relative;
-     width: 30px;
-    height: 30px;" onclick="sumar()">+</button>
-</div>
-    <script src="calculadora.js"></script>
+    <div class="bg-decoration"></div>
+    <div class="bg-decoration"></div>
+    <div class="bg-decoration"></div>
+    
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <div class="calculator-title">CALCULADORA DIGITAL</div>
+            <div class="calculator-subtitle">Profesional • Precisa • Elegante</div>
+        </div>
+        
+        <div class="display" id="displayContainer">
+            <div id="pantalla">0</div>
+        </div>
+        
+        <div class="buttons-grid">
+            <!-- Row 1 -->
+            <button class="calc-btn utility" onclick="reset()">C</button>
+            <button class="calc-btn utility" onclick="borrar()">⌫</button>
+            <button class="calc-btn operator" onclick="dividir()">÷</button>
+            <button class="calc-btn operator" onclick="multiplicar()">×</button>
+            
+            <!-- Row 2 -->
+            <button class="calc-btn number" onclick="mostrar7()">7</button>
+            <button class="calc-btn number" onclick="mostrar8()">8</button>
+            <button class="calc-btn number" onclick="mostrar9()">9</button>
+            <button class="calc-btn operator" onclick="restar()">−</button>
+            
+            <!-- Row 3 -->
+            <button class="calc-btn number" onclick="mostrar4()">4</button>
+            <button class="calc-btn number" onclick="mostrar5()">5</button>
+            <button class="calc-btn number" onclick="mostrar6()">6</button>
+            <button class="calc-btn operator" onclick="sumar()">+</button>
+            
+            <!-- Row 4 -->
+            <button class="calc-btn number" onclick="mostrar1()">1</button>
+            <button class="calc-btn number" onclick="mostrar2()">2</button>
+            <button class="calc-btn number" onclick="mostrar3()">3</button>
+            <button class="calc-btn equals" onclick="resultado()" rowspan="2">=</button>
+            
+            <!-- Row 5 -->
+            <button class="calc-btn number zero" onclick="mostrar0()">0</button>
+            <button class="calc-btn number" onclick="punto()">.</button>
+        </div>
+    </div>
+
+    <script>
+        // Tu código JavaScript original
+        let pantalla = document.getElementById("pantalla").textContent;
+
+        function mostrar9() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                if (document.getElementById("pantalla").textContent === "0") {
+                    document.getElementById("pantalla").textContent = "9";
+                } else {
+                    document.getElementById("pantalla").textContent += 9;
+                }
+            }
+        }
+
+        function mostrar8() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                if (document.getElementById("pantalla").textContent === "0") {
+                    document.getElementById("pantalla").textContent = "8";
+                } else {
+                    document.getElementById("pantalla").textContent += 8;
+                }
+            }
+        }
+
+        function mostrar7() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                if (document.getElementById("pantalla").textContent === "0") {
+                    document.getElementById("pantalla").textContent = "7";
+                } else {
+                    document.getElementById("pantalla").textContent += 7;
+                }
+            }
+        }
+
+        function mostrar6() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                if (document.getElementById("pantalla").textContent === "0") {
+                    document.getElementById("pantalla").textContent = "6";
+                } else {
+                    document.getElementById("pantalla").textContent += 6;
+                }
+            }
+        }
+
+        function mostrar5() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                if (document.getElementById("pantalla").textContent === "0") {
+                    document.getElementById("pantalla").textContent = "5";
+                } else {
+                    document.getElementById("pantalla").textContent += 5;
+                }
+            }
+        }
+
+        function mostrar4() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                if (document.getElementById("pantalla").textContent === "0") {
+                    document.getElementById("pantalla").textContent = "4";
+                } else {
+                    document.getElementById("pantalla").textContent += 4;
+                }
+            }
+        }
+
+        function mostrar3() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                if (document.getElementById("pantalla").textContent === "0") {
+                    document.getElementById("pantalla").textContent = "3";
+                } else {
+                    document.getElementById("pantalla").textContent += 3;
+                }
+            }
+        }
+
+        function mostrar2() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                if (document.getElementById("pantalla").textContent === "0") {
+                    document.getElementById("pantalla").textContent = "2";
+                } else {
+                    document.getElementById("pantalla").textContent += 2;
+                }
+            }
+        }
+
+        function mostrar1() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                if (document.getElementById("pantalla").textContent === "0") {
+                    document.getElementById("pantalla").textContent = "1";
+                } else {
+                    document.getElementById("pantalla").textContent += 1;
+                }
+            }
+        }
+
+        function mostrar0() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                if (document.getElementById("pantalla").textContent !== "0") {
+                    document.getElementById("pantalla").textContent += 0;
+                }
+            }
+        }
+
+        function sumar() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                return document.getElementById("pantalla").textContent += "+";
+            }
+        }
+
+        function resultado() {
+            try {
+                const expression = document.getElementById("pantalla").textContent
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/')
+                    .replace(/−/g, '-');
+                
+                const result = eval(expression);
+                document.getElementById("pantalla").textContent = parseFloat(result.toFixed(8)).toString();
+                
+                // Activar efecto visual
+                document.getElementById("displayContainer").classList.add("active");
+                setTimeout(() => {
+                    document.getElementById("displayContainer").classList.remove("active");
+                }, 500);
+            } catch (error) {
+                document.getElementById("pantalla").textContent = "Error";
+                setTimeout(() => {
+                    reset();
+                }, 1500);
+            }
+        }
+
+        function restar() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                return document.getElementById("pantalla").textContent += "−";
+            }
+        }
+
+        function dividir() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                return document.getElementById("pantalla").textContent += "÷";
+            }
+        }
+
+        function multiplicar() {
+            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+                return document.getElementById("pantalla").textContent += "×";
+            }
+        }
+
+        function borrar() {
+            const currentText = document.getElementById("pantalla").textContent;
+            if (currentText.length > 1) {
+                document.getElementById("pantalla").textContent = currentText.slice(0, -1);
+            } else {
+                document.getElementById("pantalla").textContent = "0";
+            }
+        }
+
+        function reset() {
+            document.getElementById("pantalla").textContent = "0";
+        }
+
+        function punto() {
+            const currentText = document.getElementById("pantalla").textContent;
+            if (currentText.toString().length < 9 && !currentText.includes('.')) {
+                document.getElementById("pantalla").textContent += ".";
+            }
+        }
+
+        // Efectos visuales para botones
+        document.querySelectorAll('.calc-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.add('pressed');
+                setTimeout(() => {
+                    this.classList.remove('pressed');
+                }, 150);
+            });
+        });
+
+        // Soporte para teclado
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            event.preventDefault();
+            
+            switch(key) {
+                case '0': mostrar0(); break;
+                case '1': mostrar1(); break;
+                case '2': mostrar2(); break;
+                case '3': mostrar3(); break;
+                case '4': mostrar4(); break;
+                case '5': mostrar5(); break;
+                case '6': mostrar6(); break;
+                case '7': mostrar7(); break;
+                case '8': mostrar8(); break;
+                case '9': mostrar9(); break;
+                case '+': sumar(); break;
+                case '-': restar(); break;
+                case '*': multiplicar(); break;
+                case '/': dividir(); break;
+                case 'Enter': 
+                case '=': resultado(); break;
+                case 'Escape': 
+                case 'c': 
+                case 'C': reset(); break;
+                case 'Backspace': borrar(); break;
+                case '.': punto(); break;
+            }
+        });
+    </script>
 </body>
 </html>
