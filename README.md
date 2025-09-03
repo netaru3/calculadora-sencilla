@@ -1,5 +1,5 @@
 # calculadora-sencilla
-Usé una IA para el frontend, no piensen que soy fullstack o algo así, soy pésimo en la estética xD.
+Usé una IA para el frontend (Claude.ai), no piensen que soy fullstack o algo así, soy pésimo en la estética xD.
 
 cómo hice la calculadora? Respuesta corta: Le pregunté a chatgpt (broma... Aunque tiene cierta verdad)
 respuesta larga: USÉ MI QUERÍDISIMO EVAL, solo manipulas el dom, y después haces que se evalúe lo que hay en la pantalla
