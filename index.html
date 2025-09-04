@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora</title>
-      <link rel="icon" href="https://img.freepik.com/vector-gratis/icono-calculadora-matematica_24877-83245.jpg?semt=ais_hybrid&w=740&q=80">
-<link rel="https://img.freepik.com/vector-gratis/icono-calculadora-matematica_24877-83245.jpg?semt=ais_hybrid&w=740&q=80">
-
+    <title>Calculadora Digital Profesional</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
         
@@ -464,8 +461,8 @@
                     .replace(/−/g, '-');
                 
                 const result = eval(expression);
-                document.getElementById("pantalla").textContent = parseFloat(result.toFixed(8)).toString();
-                
+               if(result!=Infinity){document.getElementById("pantalla").textContent = parseFloat(result.toFixed(8)).toString(); } 
+                else{document.getElementById("pantalla").textContent="Error"}
                 // Activar efecto visual
                 document.getElementById("displayContainer").classList.add("active");
                 setTimeout(() => {
@@ -509,13 +506,22 @@
         function reset() {
             document.getElementById("pantalla").textContent = "0";
         }
-
-        function punto() {
+ const a= document.getElementsByClassName("calc-btn operator")    
+        function punto() {let i=0; let element=""
             const currentText = document.getElementById("pantalla").textContent;
-            if (currentText.toString().length < 9 && !currentText.includes('.')) {
+            if (currentText.toString().length < 9 && verificarSiHayDosPuntos()===true) {
                 document.getElementById("pantalla").textContent += ".";
             }
+                function verificarSiHayDosPuntos(){for(let elementos of currentText){
+                element+=elementos; console.log(element)
+            if (element.includes("..")|| currentText.endsWith(".") || currentText.slice(0,-1).endsWith(".")){i=2;return false}
+            else if(currentText.length>=4){element=""}
+        }if(i!=2) {console.log("esto es verdadero");return true}
+        else{console.log("esto es falso");return false}
+        
+}
         }
+       
 
         // Efectos visuales para botones
         document.querySelectorAll('.calc-btn').forEach(button => {
@@ -559,4 +565,3 @@
     </script>
 </body>
 </html>
-
