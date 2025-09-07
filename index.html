@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora</title>
-      <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/342/342344.png">
+     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/342/342344.png">
 <link rel="apple-touch-icon"  href="https://cdn-icons-png.flaticon.com/512/342/342344.png"> 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
@@ -450,7 +450,11 @@
         }
 
         function sumar() {
-            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+            if (document.getElementById("pantalla").textContent.toString().length < 9 &&
+        !document.getElementById("pantalla").textContent.endsWith("×")
+        && !document.getElementById("pantalla").textContent.endsWith("÷") && 
+        !document.getElementById("pantalla").textContent.endsWith("+") &&
+         !document.getElementById("pantalla").textContent.endsWith("−")) {
                 return document.getElementById("pantalla").textContent += "+";
             }
         }
@@ -479,19 +483,25 @@
         }
 
         function restar() {
-            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+            if (document.getElementById("pantalla").textContent.toString().length < 9 &&
+        !document.getElementById("pantalla").textContent.endsWith("×")
+        && !document.getElementById("pantalla").textContent.endsWith("÷") && 
+        !document.getElementById("pantalla").textContent.endsWith("+") && 
+        !document.getElementById("pantalla").textContent.endsWith("−")) {
                 return document.getElementById("pantalla").textContent += "−";
             }
         }
 
         function dividir() {
-            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+            if (document.getElementById("pantalla").textContent.toString().length < 9 && !document.getElementById("pantalla").textContent.endsWith("×")
+        && !document.getElementById("pantalla").textContent.endsWith("÷") && !document.getElementById("pantalla").textContent.endsWith("+") && !document.getElementById("pantalla").textContent.endsWith("−")) {
                 return document.getElementById("pantalla").textContent += "÷";
             }
         }
 
         function multiplicar() {
-            if (document.getElementById("pantalla").textContent.toString().length < 9) {
+            if (document.getElementById("pantalla").textContent.toString().length < 9 && !document.getElementById("pantalla").textContent.endsWith("×")
+        && !document.getElementById("pantalla").textContent.endsWith("÷") && !document.getElementById("pantalla").textContent.endsWith("+") && !document.getElementById("pantalla").textContent.endsWith("−")){
                 return document.getElementById("pantalla").textContent += "×";
             }
         }
@@ -582,5 +592,3 @@
     </script>
 </body>
 </html>
-
-
