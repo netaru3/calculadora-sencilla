@@ -307,6 +307,7 @@
     <div class="calculator-container">
         <div class="calculator-header">
             <div class="calculator-title">CALCULADORA DIGITAL</div>
+            <div class="calculator-subtitle">Profesional • Precisa • Elegante</div>
         </div>
         
         <div class="display" id="displayContainer">
@@ -505,22 +506,37 @@
         function reset() {
             document.getElementById("pantalla").textContent = "0";
         }
- const a= document.getElementsByClassName("calc-btn operator")    
-        function punto() {let i=0; let element=""
+
+        const a= document.getElementsByClassName("calc-btn operator")    
+        function punto() {let i=0; let element=""; let element2="";
             const currentText = document.getElementById("pantalla").textContent;
+            const currentTextArray = currentText.split(/[\+\-\×\÷]/);
+
             if (currentText.toString().length < 9 && verificarSiHayDosPuntos()===true) {
-                document.getElementById("pantalla").textContent += ".";
+              return  document.getElementById("pantalla").textContent += ".";
             }
                 function verificarSiHayDosPuntos(){for(let elementos of currentText){
                 element+=elementos; console.log(element)
-            if (element.includes("..")|| currentText.endsWith(".") || currentText.slice(0,-1).endsWith(".")){i=2;return false}
-            else if(currentText.length>=4){element=""}
-        }if(i!=2) {console.log("esto es verdadero");return true}
+            if (element.includes(".")||currentText.endsWith(".") ||currentText.slice(0,-1).endsWith(".")){i=2;return false}
+            else if(currentText.length>=4){element="";}}
+            return true}
+        function verificarSiHayDosPuntos2(){for(let elementos2 of currentTextArray[1]){
+                element2+=elementos2; console.log(element2)
+            if (element2.includes(".")||currentTextArray[1].endsWith(".") ||currentTextArray[1].slice(0,-1).endsWith(".")){i=2;return false}
+            else if(currentTextArray[1].length>=4){element2="";}}
+        return true;
+}
+
+             if(currentText.includes("+")|| currentText.includes("-")|| currentText.includes("×")|| currentText.includes("÷")){ verificarSiHayDosPuntos2()}
+             if (currentText.toString().length < 9 && verificarSiHayDosPuntos2()===true) {
+               return document.getElementById("pantalla").textContent += ".";
+            }
+
+        if(i!=2) {console.log("esto es verdadero");return true}
         else{console.log("esto es falso");return false}
         
 }
-        }
-       
+        
 
         // Efectos visuales para botones
         document.querySelectorAll('.calc-btn').forEach(button => {
@@ -564,4 +580,3 @@
     </script>
 </body>
 </html>
-
